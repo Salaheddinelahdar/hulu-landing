@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Win a $100 Hulu Gift Card — Claim Now</title>
+  <meta name="description" content="Win a $100 Hulu gift card. Offer valid for Android users in the United States. Click continue to claim your chance." />
+  <style>
+    :root{--bg:#041926;--card:#07202b;--accent:#2dd4bf;--muted:#9fb3bd;--btn:#14b8a6;--glass: rgba(255,255,255,0.03);--radius:14px}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#02121a 0%,#041926 100%);color:#e6f6f5;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+    .wrap{width:100%;max-width:880px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:28px;border-radius:var(--radius);box-shadow:0 20px 50px rgba(2,8,12,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .badge{display:inline-block;background:var(--accent);color:#00221f;padding:8px 12px;border-radius:999px;font-weight:700;font-size:13px}
+    h1{margin:14px 0 8px;font-size:28px;line-height:1.02;color:#ffffff}
+    p.lead{margin:0;color:var(--muted);font-size:15px}
+    .visual{display:flex;gap:28px;align-items:center;margin-top:20px;flex-wrap:wrap}
+    .image-wrap{flex:0 0 340px;display:flex;align-items:center;justify-content:center}
+    .gift-image{width:320px;max-width:100%;border-radius:12px;box-shadow:0 20px 40px rgba(3,9,14,0.6);}
+    .info{flex:1;min-width:220px}
+    .note{margin-top:18px;padding:14px;border-radius:10px;background:var(--glass);color:#ffd6d0;border:1px solid rgba(255,100,100,0.05)}
+    .cta{margin-top:22px}
+    .btn{display:inline-block;background:var(--btn);color:#022;padding:14px 20px;border-radius:12px;text-decoration:none;font-weight:800;font-size:16px;box-shadow:0 8px 30px rgba(20,184,166,0.12)}
+    .meta{margin-top:10px;color:var(--muted);font-size:13px}
+    .footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+    @media(max-width:720px){h1{font-size:22px}.visual{flex-direction:column}.image-wrap{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="mainCard" data-offer-link="https://singingfiles.com/show.php?p=0&u=2472881&id=71508">
+      <span class="badge">Limited Time • USA</span>
+      <h1>Win a <strong>$100 Hulu Gift Card</strong></h1>
+      <p class="lead">Claim your chance to win a $100 Hulu gift card by completing a short form. Offer valid for Android users in the United States.</p>
+
+      <div class="visual">
+        <div class="image-wrap" aria-hidden="true">
+          <img src="hulu-card.png" alt="$100 Hulu Gift Card" class="gift-image">
+        </div>
+
+        <div class="info">
+          <div class="note" id="deviceNotice" style="display:none;">
+            <strong>Note:</strong> This offer converts only for Android users in the United States. iOS and desktop visitors may not qualify.
+          </div>
+
+          <div class="cta">
+            <a class="btn" id="claimBtn" href="#" role="button">Continue to Claim →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">No purchase necessary to enter. By clicking continue you agree to be redirected to the offer provider.</div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const isAndroid = /android/i.test(navigator.userAgent);
+      const main = document.getElementById('mainCard');
+      const btn = document.getElementById('claimBtn');
+      const notice = document.getElementById('deviceNotice');
+
+      if(!isAndroid){
+        notice.style.display = 'block';
+      }
+
+      // Offer link (update with your final CPAGrip link if different)
+      const offerLink = main.getAttribute('data-offer-link') || '#';
+
+      // allow ?tid= to be appended to the offer link
+      const urlParams = new URLSearchParams(window.location.search);
+      const tid = urlParams.get('tid');
+      let finalLink = offerLink;
+      if(tid){
+        const sep = offerLink.includes('?') ? '&' : '?';
+        finalLink = offerLink + sep + 'tid=' + encodeURIComponent(tid);
+      }
+
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        btn.textContent = 'Redirecting…';
+        btn.style.opacity = '0.9';
+        window.open(finalLink, '_blank', 'noopener');
+        setTimeout(()=>{ window.location.href = finalLink; }, 800);
+      });
+    })();
+  </script>
+</body>
+</html>
